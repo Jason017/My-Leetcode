@@ -1,3 +1,3 @@
 # My-Leetcode
 
-Leetcode questions I have completed, serving as a purpose for revision and looking back.
+Solutions of Leetcode questions I have completed, serving as a purpose for better reviewing and looking back.
