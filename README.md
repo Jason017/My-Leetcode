@@ -1,3 +1,3 @@
 # My-Leetcode
 
-Storing Leetcode questions that has been completed and as a purpose for revision and looking back.
+Leetcode questions I have completed, serving as a purpose for revision and looking back.
