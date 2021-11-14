@@ -29,7 +29,6 @@ class Solution:
         n = len(nums)
         for i in range(n):
             if nums[i] != 0:
-                temp = nums[i]
-                nums[i] = nums[idx]
-                nums[idx] = temp
+                nums[i],nums[idx] = nums[idx],nums[i]
                 idx += 1
+                
