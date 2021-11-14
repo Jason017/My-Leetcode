@@ -1,6 +1,7 @@
 from typing import List
 
 class Solution:
+    # Solution 1
     def moveZeroes(self, nums: List[int]) -> None:
         """
         Do not return anything, modify nums in-place instead.
@@ -18,6 +19,7 @@ class Solution:
         for j in range(idx,n):
             nums[j] = 0
 
+    # Solution 2
     def moveZeros(self, nums: List[int]) -> None:
         """
         Do not return anything, modify nums in-place instead.
