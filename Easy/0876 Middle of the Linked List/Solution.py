@@ -1,6 +1,6 @@
-# Definition for singly-linked list.
-from typing import List, Optional
+from typing import Optional
 
+# Definition for singly-linked list.
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
@@ -22,20 +22,23 @@ class ListNode:
         return List
 
 class Solution:
+    # Solution 1
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
         slow = fast = head
-
+        
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
             
         return slow
-    
+ 
+    # Solution 2
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
         res = [head]
         while res[-1].next:
             res.append(res[-1].next)
         return res[len(res)//2]
+
 
 sol = Solution()
 arr = [1,2,3,4,5]
