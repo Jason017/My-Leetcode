@@ -9,16 +9,15 @@ class Solution:
             temp = []
             for j in ans:
                 temp.append([i] + j)
-                print("temp:",temp)
+                # print("temp:",temp)
             ans.extend(temp)
-            print(ans)
+            # print(ans)
         return(ans)
 
 
-if __name__ == "__main__":
-    solution = Solution
-    nums = [1,2,2,3]
-    print(solution.subsetsWithDup(solution, nums))
+sol = Solution()
+nums = [1,2,2,3]
+print(sol.subsetsWithDup(nums))
 
 
 

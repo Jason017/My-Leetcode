@@ -2,12 +2,10 @@ from typing import List
 
 class Solution:
     def canAttendMeetings(self, intervals: List[List[int]]) -> bool:
-
-        mx = -1
-        intervals.sort()
-        for start, end in intervals:
-            if mx > start or mx > end:
-                return False
-            mx = end
         
+        intervals.sort()
+        for i in range(len(intervals)-1):
+            if intervals[i][1] > intervals[i+1][0] or intervals[i][1] > intervals[i+1][1]:
+                return False
         return True
+            
