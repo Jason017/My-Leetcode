@@ -16,8 +16,7 @@ class Solution:
 
 
 sol = Solution()
-nums = [1,2,2,3]
-print(sol.subsetsWithDup(nums))
+print(sol.subsetsWithDup([1,2,2,3]))
 
 
 
