@@ -1,3 +1,4 @@
+# https://leetcode.com/problems/permutation-in-string/discuss/1593307/Python3-Easy-Understanding-Sliding-Window-faster-than-92.86-of-Python3-online-submissions
 from collections import Counter
 
 class Solution:
@@ -50,3 +51,28 @@ class Solution:
                 return True
         
         return False
+
+    # Solution 3
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        l1, l2 = len(s1), len(s2)
+        
+        if l1 > l2:
+            return False
+
+        d1, d2 = dict(Counter(s1)), dict(Counter(s2[:l1]))
+        
+        if d1 == d2:
+            return True
+        
+        for i in range(1, l2-l1+1):
+            d2[s2[i-1]] -= 1
+            d2[s2[i+l1-1]] = d2.get(s2[i+l1-1], 0) + 1
+            
+            if d2[s2[i-1]] == 0:
+                d2.pop(s2[i-1])
+            if d1 == d2:
+                return True
+            
+        return False
+
+print(ord('a'))

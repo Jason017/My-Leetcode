@@ -10,7 +10,7 @@ class Solution:
         nums.sort()
         return nums[k-1]
     
-    # Solution 1
+    # Solution 2
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
         l,r,n = matrix[0][0], matrix[-1][-1], len(matrix)
 
