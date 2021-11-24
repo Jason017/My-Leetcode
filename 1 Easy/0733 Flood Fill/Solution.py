@@ -1,3 +1,5 @@
+from typing import List
+
 class Solution:
     def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
         m, n = len(image), len(image[0])
