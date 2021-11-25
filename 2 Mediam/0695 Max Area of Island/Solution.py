@@ -1,7 +1,7 @@
 from typing import List
 
 class Solution:
-    # Solution 1
+    # Solution 1: O(n^2) O(n)
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
         seen = set()
         res = 0
@@ -17,7 +17,7 @@ class Solution:
                 res = max(res, dfs(i,j))
         return res
 
-    # Solution 2
+    # Solution 2: O(n^2) O(1) 
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
         m,n,res = len(grid),len(grid[0]),0
         

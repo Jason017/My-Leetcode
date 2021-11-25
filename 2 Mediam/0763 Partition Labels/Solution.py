@@ -2,6 +2,7 @@ from collections import Counter
 from typing import List
 
 class Solution:
+    # Solution 1
     def partitionLabels(self, s: str) -> List[int]:
         count = Counter(s)
         char_set = set()
@@ -20,7 +21,8 @@ class Solution:
                 
         return res
 
-    def partitionLabels2(self, s: str) -> List[int]:
+    # Solution 2
+    def partitionLabels(self, s: str) -> List[int]:
         last = {c:i for i,c in enumerate(s)}
         j = anchor = 0
         ans = []
@@ -31,9 +33,10 @@ class Solution:
                 anchor = i+1
         return ans
 
-solution = Solution()
+sol = Solution()
 s1 = "ababcbacadefegdehijhklij"
 s2 = "eccbbbbdec"
-print(solution.partitionLabels2(s1))
+print(sol.partitionLabels(s1))
+print(sol.partitionLabels(s2))
 
 
