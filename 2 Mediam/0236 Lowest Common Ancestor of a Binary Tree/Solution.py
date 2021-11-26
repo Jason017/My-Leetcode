@@ -8,7 +8,7 @@ class Solution:
     def __init__(self):
         self.ans = None
 
-    # Solution 1: Recursion
+    # Solution 1: Backtracking
     # O(n) O(n)
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         def backtrack(curr):
@@ -22,8 +22,25 @@ class Solution:
             if left+mid+right == 2:
                 self.ans = curr
             return left or mid or right
+        backtrack(root)
+        return self.ans
 
-    # Solution 2: Iteration with Parent Pointers
+    # Solution 2: DFS
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if not root: return None
+        if p == root or q == root:
+            return root
+        left = self.lowestCommonAncestor(root.left, p , q)
+        right = self.lowestCommonAncestor(root.right, p , q)
+        
+        if left and right:
+            return root
+        if not left:
+            return right
+        if not right:
+            return left
+
+    # Solution 3: Iteration with Parent Pointers
     # O(n) O(n)
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         stack = [root]
@@ -44,35 +61,3 @@ class Solution:
         while q not in ancestors:
             q = parent[q]
         return q
-
-    # Solution 3: Iteration without Parent Pointers
-    # O(n) O(n)
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        BOTH_PENDING = 2
-        BOTH_DONE = 0
-        stack = [(root, BOTH_PENDING)]
-        one_node_found = False
-        LCA_index = -1
-        while stack:
-            parent_node, parent_state = stack[-1]
-            if parent_state != BOTH_DONE:
-                if parent_state == BOTH_PENDING:
-                    if parent_node == p or parent_node == q:
-                        if one_node_found:
-                            return stack[LCA_index][0]
-                        else:
-                            one_node_found = True
-                            LCA_index = len(stack) - 1
-                    child_node = parent_node.left
-                else:
-                    child_node = parent_node.right
-                stack.pop()
-                stack.append((parent_node, parent_state - 1))
-                
-                if child_node:
-                    stack.append((child_node, BOTH_PENDING))
-            else:
-                if one_node_found and LCA_index == len(stack) - 1:
-                    LCA_index -= 1
-                stack.pop()
-        return None
