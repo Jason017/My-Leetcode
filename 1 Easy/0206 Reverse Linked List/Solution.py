@@ -20,7 +20,7 @@ class Solution:
         return prev
 
     # Solution 2: Recursion
-    # O(n), O(log(n))
+    # O(n), O(n)
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head or not head.next:
             return head
@@ -30,7 +30,7 @@ class Solution:
         return prev
 
     # Solution 3: Recursion with helper method
-    # O(n), O(log(n))
+    # O(n), O(n)
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         def helper(curr, prev):
             if not curr:
