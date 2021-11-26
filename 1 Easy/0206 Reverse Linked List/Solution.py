@@ -17,11 +17,10 @@ class Solution:
             curr.next = prev
             prev = curr
             curr = nextnode
-        
         return prev
 
     # Solution 2: Recursion
-    # O(n), O(n)
+    # O(n), O(log(n))
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head or not head.next:
             return head
@@ -29,4 +28,16 @@ class Solution:
         head.next.next = head
         head.next = None
         return prev
-        
+
+    # Solution 3: Recursion with helper method
+    # O(n), O(log(n))
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        def helper(curr, prev):
+            if not curr:
+                return prev
+            nextnode = curr.next
+            curr.next = prev
+            return helper(nextnode, curr)
+        return helper(head, None)
+
+            
