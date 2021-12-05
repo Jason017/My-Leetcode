@@ -19,8 +19,9 @@ class Solution:
         return stack
 
     # Solution 2: Simpler Stack Approach
+    # O(n), O(1)
     def asteroidCollision(self, asteroids: List[int]) -> List[int]:
-        stack = [] 
+        stack = []
 
         for ast in asteroids:
             while stack and ast < 0 < stack[-1]:

@@ -1,7 +1,37 @@
 from typing import List
 
 class Solution:
-    # Solution 1
+    # Solution 1: Brute Force
+    # O(2^(2n) * n), O(n)
+    def generateParenthesis(self, n: int) -> List[str]:
+        def valid(curr):
+            bal = 0
+            for c in curr:
+                if c == "(":
+                    bal += 1
+                else:
+                    bal -= 1
+                if bal < 0:
+                    return False
+            return bal == 0
+
+        def generate(curr=[]):
+            if len(curr) == n*2:
+                if valid(curr):
+                    output.append("".join(curr))
+            else:
+                curr.append("(")
+                generate(curr)
+                curr.pop()
+                curr.append(")")
+                generate(curr)
+                curr.pop()
+        output=[]
+        generate()
+        return output
+
+    # Solution 2: Backtracking
+    # O(n), O(n)
     def generateParenthesis(self, n: int) -> List[str]:
         ans = []
         stack = []
@@ -23,20 +53,21 @@ class Solution:
                 
         backtrack(0, 0)
         return ans
-
-    # Solution 2
+    
+    # Simpler Approach
+    # O(n), O(n)
     def generateParenthesis(self, n: int) -> List[str]:
-        ans = []
-        def backtrack(curr, nOpen, nClose):
-            if nOpen == nClose == 0:
-                ans.append(curr)
+        output = []
+        def backtrack(curr="", nOpen=0, nClose=0):
+            if nOpen == nClose == n:
+                output.append(curr)
                 return 
             
-            if nOpen < nClose:
-                backtrack(curr + ')', nOpen, nClose-1)
+            if nOpen > nClose:
+                backtrack(curr + ')', nOpen, nClose+1)
                 
-            if nOpen > 0:
-                backtrack(curr + '(', nOpen-1, nClose)
+            if nOpen < n:
+                backtrack(curr + '(', nOpen+1, nClose)
                 
-        backtrack("", n, n)
-        return ans
+        backtrack()
+        return output

@@ -1,7 +1,8 @@
 from typing import List
 
 class Solution:
-    # Solution 1
+    # Solution 1: DP
+    # O(n), O(n)
     def rob(self, nums: List[int]) -> int:
         n = len(nums)
         
@@ -18,7 +19,8 @@ class Solution:
             dp[i] = max(dp[i-1], dp[i-2]+nums[i])
         return dp[-1]
 
-    # Solution 2
+    # Solution 2: Optimized DP
+    # O(n), O(1)
     def rob(self, nums: List[int]) -> int:
         rob1, rob2 = 0, 0
         
