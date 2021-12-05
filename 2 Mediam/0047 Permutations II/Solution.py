@@ -12,6 +12,8 @@ class Solution:
                 self.backtrack(nums, output, level+1)
             nums[i], nums[level] = nums[level], nums[i]
 
+    # Solution 1: Backtraking by swapping
+    # O(n*n!), O(n!)
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
         output = []
         self.backtrack(nums, output)
