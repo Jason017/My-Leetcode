@@ -43,17 +43,19 @@ class Solution:
     # O(n) in the worst case when the tree is BST or the "bad" element is a rightmost leaf
     # O(n) to keep stack
     def isValidBST(self, root: TreeNode) -> bool:
-        stack, prev = [], -math.inf
-
-        while stack or root:
-            while root:
-                stack.append(root)
-                root = root.left
-            root = stack.pop()
-            if root.val <= prev:
-                return False
-            prev = root.val
-            root = root.right
+        stack = []
+        curr = root
+        prev = None
+        while stack or curr:
+            if curr:
+                stack.append(curr)
+                curr = curr.left
+            else:
+                p = stack.pop()
+                if prev and p.val <= prev.val:
+                    return False
+                prev = p
+                curr = p.right
         return True
 
 
