@@ -16,7 +16,7 @@ class Solution:
         return res if res <= len(nums) else 0
 
     # Solution 2: Binary Search
-    # O(nlog(n)), O(1)
+    # O(n*log(n)), O(1)
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
         n = len(nums)
         start, end = 1, n
@@ -29,8 +29,8 @@ class Solution:
                 found += 1
                 if i >= mx:
                     found -= 1
-                    target += nums[i - found]
-                if target < 0:
+                    target += nums[i - mx]
+                if target <= 0:
                     return found
             return -1
 
