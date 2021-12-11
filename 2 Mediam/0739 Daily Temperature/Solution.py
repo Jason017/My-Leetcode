@@ -19,6 +19,7 @@ class Solution:
         return ans
     
     # Better Stack Approach
+    # O(n), O(n)
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
         stack = []
         n = len(temperatures)
@@ -33,7 +34,7 @@ class Solution:
         return ans
 
     # Solution 2: Array, Optimized Space
-    # Better Stack Approach
+    # # O(n), O(1)
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
         n = len(temperatures)
         ans = []
