@@ -30,11 +30,16 @@ class Solution:
                 mp[stack.pop()] = num
             stack.append(num)
         
-        ans = []
-        for num in nums1:
-            if num in mp:
-                ans.append(mp[num])
-            else:
-                ans.append(-1)
+        return [mp.get(num, -1) for num in nums1]
+
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        mp = {}
+        stack = []
+
+        for num in nums2[::-1]:
+            while stack and stack[-1] <= num:
+                stack.pop()
+            mp[num] = stack[-1] if stack else -1
+            stack.append(num)
         
-        return ans
+        return [mp.get(num, -1) for num in nums1]
