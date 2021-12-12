@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-class TrieNode(object):
+class TrieNode:
     def __init__(self):
         self.nodes = defaultdict(TrieNode)
         self.isEnd = False
@@ -30,3 +30,15 @@ class Trie:
                 return False
             curr = curr.nodes[char]
         return True
+
+def main():
+    t = Trie()
+    t.insert("apple")
+    print(t.search("apple")) # True
+    print(t.search("app")) # False
+    print(t.startsWith("app")) # True
+    t.insert("app")
+    print(t.search("app")) # True
+
+if __name__ == "__main__":
+    main()
