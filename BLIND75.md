@@ -4,7 +4,7 @@
 - [ ][ ][ ][ ][ ] [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters)
 - [ ][ ][ ][ ][ ] [Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring)
 - [ ][ ][ ][ ][ ] [Container With Most Water](https://leetcode.com/problems/container-with-most-water)
-- [ ][ ][ ][ ][ ] [Sum](https://leetcode.com/problems/3sum)
+- [ ][ ][ ][ ][ ] [3Sum](https://leetcode.com/problems/3sum)
 - [ ][ ][ ][ ][ ] [Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list)
 - [ ][ ][ ][ ][ ] [Valid Parentheses](https://leetcode.com/problems/valid-parentheses)
 - [ ][ ][ ][ ][ ] [Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists)
