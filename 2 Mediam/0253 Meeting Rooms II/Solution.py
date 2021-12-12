@@ -3,7 +3,7 @@ from typing import List
 
 class Solution:
     # Solution 1: Scanning line
-    # O(n), O(n)
+    # O(n*log(n)), O(n)
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
         pairs = []
         for start, end in intervals:
