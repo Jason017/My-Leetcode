@@ -1,6 +1,6 @@
 # Blind-75 Checklist
 
-- [x] [Two Sum](https://leetcode.com/problems/two-sum)
+- [X] [Two Sum](https://leetcode.com/problems/two-sum)
 - [ ] [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters)
 - [ ] [Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring)
 - [ ] [Container With Most Water](https://leetcode.com/problems/container-with-most-water)
