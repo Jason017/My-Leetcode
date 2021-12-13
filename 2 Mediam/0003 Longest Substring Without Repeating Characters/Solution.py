@@ -18,8 +18,28 @@ class Solution:
     
         return ans
 
-    # Solution 2: Optimized Sliding Window
-    # O(n), O(n) 
+
+    # Solution 2: Sliding Window
+    # O(n), O(n)
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if not s:
+            return 0
+            
+        chars = [0] * 128
+        left = right = ans = 0
+
+        while right < len(s):
+            chars[ord(s[right])] += 1
+            while chars[ord(s[right])] > 1:
+                chars[ord(s[left])] -= 1
+                left += 1
+            ans = max(ans, right - left + 1)
+            right += 1
+        return ans
+
+
+    # Solution 3: Optimized Sliding Window
+    # O(n), O(n)
     def lengthOfLongestSubstring(self, s: str) -> int:
         if not s:
             return 0

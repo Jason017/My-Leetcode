@@ -24,3 +24,7 @@ class Solution:
             if not dfs(crs):
                 return False
         return True 
+
+numCourses = 5
+prerequisites = [[0,2],[1,0],[2,1],[3,4],[4,0]]
+

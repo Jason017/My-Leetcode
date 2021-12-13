@@ -14,7 +14,6 @@ class Solution:
             return node
 
         oldToNew = {node: Node(node.val)}
-
         def dfs(n):
             for nei in n.neighbors:
                 if nei not in oldToNew:
@@ -31,7 +30,6 @@ class Solution:
             return node
 
         oldToNew = {}
-
         def dfs(n):
             if n in oldToNew:
                 return oldToNew[n]

@@ -1,25 +1,32 @@
 class Solution:
+    # Solution 1: Stack
+    # O(n), O(n)
     def isValid(self, s: str) -> bool:
-        if len(s) == 0 or not s:
-            return False
-        
-        para = {
-            '(':')',
-            '[':']',
-            '{':'}'
-        }
-        # "()[]{}"
-        
+        mp = {'(':')','[':']','{':'}'}
         stack = []
-        for i in s:
-            if i in para:
-                stack.append(i)
-            elif i in para.values() and stack:
-                if para[stack[-1]] == i:
+
+        for char in s:
+            if char in mp:
+                stack.append(char)
+            elif char in mp.values() and stack:
+                if mp[stack[-1]] == char:
                     stack.pop()
                 else:
                     return False
             else:
                 return False
             
+        return stack == []
+    
+    def isValid(self, s: str) -> bool:
+        mp = {'(':')','[':']','{':'}'}
+        stack = []
+
+        for char in s:
+            if char in mp:
+                stack.append(char)
+            elif not stack and char in mp.values():
+                return False
+            else:
+                stack.pop()
         return stack == []

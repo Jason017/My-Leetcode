@@ -3,7 +3,7 @@ class Solution:
     # O(n^2), O(n^2)
     def longestPalindrome(self, s):
         n = len(s)
-        dp = [[False]*n for _ in range(n)]
+        dp = [[False] * n for _ in range(n)]
         for i in range(n):
             dp[i][i] = True
         
@@ -40,6 +40,7 @@ class Solution:
                         
         return s[start:end+1]
 
+    # Simpler Approach
     def longestPalindrome(self, s: str) -> str:
         def get_palindrome(l, r):
             while l >= 0 and r < len(s) and s[l] == s[r]:

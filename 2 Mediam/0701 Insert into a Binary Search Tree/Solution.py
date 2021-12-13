@@ -22,6 +22,9 @@ class Solution:
     # Solution 2: Iteration
     # O(log(n)) O(1)
     def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        if not root:
+            return TreeNode(val)
+
         curr = root
         while curr:
             if val > curr.val:
@@ -36,4 +39,3 @@ class Solution:
                     return root
                 else:
                     curr = curr.left
-        return TreeNode(val)
