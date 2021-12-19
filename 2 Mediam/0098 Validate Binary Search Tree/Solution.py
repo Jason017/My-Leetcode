@@ -1,4 +1,3 @@
-import math
 from typing import Optional
 
 class TreeNode:
@@ -36,8 +35,9 @@ class Solution:
             self.prev = root.val
             return inOrder(root.right)
 
-        self.prev = -math.inf
+        self.prev = float('-inf')
         return inOrder(root)
+
 
     # Solution 2: Iterative Inorder Traversal
     # O(n) in the worst case when the tree is BST or the "bad" element is a rightmost leaf
@@ -51,18 +51,18 @@ class Solution:
                 stack.append(curr)
                 curr = curr.left
             else:
-                p = stack.pop()
-                if prev and p.val <= prev.val:
+                node = stack.pop()
+                if prev and node.val <= prev.val:
                     return False
-                prev = p
-                curr = p.right
+                prev = node
+                curr = node.right
         return True
 
 
     # Solution 3: Recursive Traversal with Valid Range
     # O(n), O(n)
     def isValidBST(self, root: TreeNode) -> bool:
-        def validate(node, low=-math.inf, high=math.inf):
+        def validate(node, low=float('-inf'), high=float('inf')):
             if not node:
                 return True
             if node.val <= low or node.val >= high:
@@ -72,31 +72,13 @@ class Solution:
         return validate(root)
 
 
-
     # Solution 4: Recursive Traversal with Valid Range
     # O(n), O(n)
     def isValidBST(self, root: TreeNode) -> bool:
         if not root:
             return True
 
-        stack = [(root, -math.inf, math.inf)]
-        while stack:
-            root, lower, upper = stack.pop()
-            if not root:
-                continue
-            val = root.val
-            if val <= lower or val >= upper:
-                return False
-            stack.append((root.right, val, upper))
-            stack.append((root.left, lower, val))
-        return True
-        
-    # Solution 5: Iterative Traversal with Valid Range
-    # O(n), O(n)
-    def isValidBST(self, root: TreeNode) -> bool:
-        if not root:
-            return True
-        stack = [(root, -math.inf, math.inf)]
+        stack = [(root, float('-inf'), float('inf'))]
         while stack:
             root, lower, upper = stack.pop()
             if not root:
