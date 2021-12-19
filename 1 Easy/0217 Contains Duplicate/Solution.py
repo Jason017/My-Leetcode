@@ -1,7 +1,7 @@
 from typing import List
 
 class Solution:
-    # Solution 1
+    # Solution 1: Set
     # O(n) O(n)
     def containsDuplicate(self, nums: List[int]) -> bool:
         seen = set()
