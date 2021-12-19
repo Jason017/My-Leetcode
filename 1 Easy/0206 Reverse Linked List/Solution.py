@@ -32,12 +32,10 @@ class Solution:
     # Solution 3: Recursion with helper method
     # O(n), O(n)
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        def helper(curr, prev):
+        def helper(prev, curr):
             if not curr:
                 return prev
-            nextnode = curr.next
+            nextNode = curr.next
             curr.next = prev
-            return helper(nextnode, curr)
-        return helper(head, None)
-
-            
+            return helper(curr, nextNode)
+        return helper(None, head)
