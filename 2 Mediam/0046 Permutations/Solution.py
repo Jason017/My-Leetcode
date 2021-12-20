@@ -7,20 +7,22 @@ class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         return [list(perm) for perm in permutations(nums)]
     
+
     # Solution 2: Backtraking by swapping
     # O(n*n!), O(n!)
-    def dfs(self, nums, level, output):
-        if level == len(nums):
-            output.append(nums[:])
-        for i in range(level, len(nums)):
-            nums[level], nums[i] = nums[i], nums[level]
-            self.dfs(nums, level+1, output)
-            nums[level], nums[i] = nums[i], nums[level]
-            
     def permute(self, nums: List[int]) -> List[List[int]]:
         output = []
-        self.dfs(nums, 0, output)
+
+        def dfs(level=0):
+            if level == len(nums):
+                output.append(nums[:])
+            for i in range(level, len(nums)):
+                nums[level], nums[i] = nums[i], nums[level]
+                dfs(level+1)
+                nums[level], nums[i] = nums[i], nums[level]
+        dfs()
         return output
+
 
     # Solution 3: Backtraking by changing the order
     # O(n*n!), O(n!)
@@ -40,16 +42,18 @@ class Solution:
         return output
 
     # https://leetcode.com/problems/permutations/discuss/18296/Simple-Python-solution-(DFS).
-    def dfs(self, output, nums, curr=[]):
-        if not nums:
-            output.append(curr)
-        for i in range(len(nums)):
-            self.dfs(output, nums[:i]+nums[i+1:], curr+[nums[i]])
-
     def permute(self, nums: List[int]) -> List[List[int]]:
         output = []
-        self.dfs(output, nums)
+
+        def dfs(nums, curr=[]):
+            if not nums:
+                output.append(curr)
+            for i in range(len(nums)):
+                dfs(nums[:i]+nums[i+1:], curr+[nums[i]])
+
+        dfs(nums)
         return output
+
 
     # Solution 4: Iterative Approach
     def permute(self, nums: List[int]) -> List[List[int]]:

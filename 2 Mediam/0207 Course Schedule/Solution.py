@@ -30,7 +30,7 @@ class Solution:
         return True 
 
 
-    # Solution 2: Iterative DFS
+    # Solution 2: Iterative DFS, Graph Theory
     # O(N+E), O(N)
     def canFinish(self, numCourses, prerequisites):
         edges = [[] for _ in range(numCourses)]

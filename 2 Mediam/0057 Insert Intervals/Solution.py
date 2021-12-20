@@ -7,18 +7,18 @@ class Solution:
         if not intervals:
             return [newInterval]
         
-        st, en = newInterval
+        start, end = newInterval
         res = []
         idx = 0
         
-        while idx < len(intervals) and intervals[idx][0] < st:
+        while idx < len(intervals) and intervals[idx][0] < start:
             res.append(intervals[idx])
             idx += 1
         
-        if not res or res[-1][1] < st:
+        if not res or res[-1][1] < start:
             res.append(newInterval)
         else:
-            res[-1][1] = max(res[-1][1], en)
+            res[-1][1] = max(res[-1][1], end)
         
         
         while idx < len(intervals):
