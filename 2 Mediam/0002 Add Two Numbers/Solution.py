@@ -4,7 +4,10 @@ class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
+
 class Solution:
+    # Solution 1: Brute Force
+    # O(max(L1, L2)), O(1)
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         head1, head2 = l1, l2
         answer = head = ListNode(0)
