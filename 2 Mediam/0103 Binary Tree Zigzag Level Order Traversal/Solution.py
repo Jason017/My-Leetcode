@@ -39,26 +39,20 @@ class Solution:
         if not root:
             return output
 
-        q=deque([root])
-        level=0
+        q = deque([root])
+        level = 0
+
         while q:
             size = len(q)
-            output.append([])
-            if level%2==0:
-                for _ in range(size):
-                    node = q.popleft()
-                    output[level].append(node.val)
-                    if node.left:
-                        q.append(node.left)
-                    if node.right:
-                        q.append(node.right)
-            else:
-                for _ in range(size):
-                    node = q.popleft()
-                    output[level].insert(0, node.val)
-                    if node.left:
-                        q.append(node.left)
-                    if node.right:
-                        q.append(node.right)
-            level+=1
+            tmp = []
+            for _ in range(size):
+                node = q.popleft()
+                tmp.append(node.val)
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+            output.append(tmp if level%2==0 else tmp[::-1])
+            level += 1
+            
         return output

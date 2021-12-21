@@ -1,7 +1,8 @@
 from typing import List
 
 class Solution:
-    # Solution 1
+    # Solution 1: Left and Right product lists
+    # O(N), O(N)
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         n = len(nums)
         res = [1] * n
@@ -15,12 +16,11 @@ class Solution:
             postfix *= nums[i]
         return res
         
-    # Solution 2
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         n = len(nums)
         res = []
         prefix = 1
-        for i in range(0,n):
+        for i in range(n):
             res.append(prefix)
             prefix *= nums[i]
         postfix = 1
