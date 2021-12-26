@@ -27,6 +27,12 @@ Example 3:
 Input: prices = [1]
 Output: 1
 Explanation: There is 1 smooth descent period: [1]
+
+
+Constraints:
+
+1 <= prices.length <= 105
+1 <= prices[i] <= 105
 '''
 from typing import List
 
