@@ -37,9 +37,8 @@ Constraints:
 from typing import List
 
 class Solution:
-    # Solution 1: List
+    # Solution 1: List (Accepted)
     # O(N), O(N)
-    # Accepted
     def getDescentPeriods(self, prices: List[int]) -> int:
         count = 1
         n = len(prices)
