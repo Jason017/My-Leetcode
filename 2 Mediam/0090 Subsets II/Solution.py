@@ -6,12 +6,13 @@ class Solution:
     def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
         nums.sort()
         ans = [[]]
-
-        for i in nums:
-            temp = []
-            for j in ans:
-                temp.append([i] + j)
-            ans.extend(temp)
+        size = 0
+        
+        for i in range(len(nums)):
+            start = size if i >= 1 and nums[i] == nums[i-1] else 0
+            size = len(ans)
+            for j in range(start, size):
+                ans.append(ans[j] + [nums[i]])
         return ans
 
 
