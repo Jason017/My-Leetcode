@@ -11,6 +11,7 @@ class Solution:
         nums.sort()
         return nums[k-1]
     
+
     # Solution 2 (Best Approach): Binary Search
     # O(N*log(N)), O(1)
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
@@ -34,6 +35,7 @@ class Solution:
                 right = mid
         return left
 
+
     # Solution 3: Min-Heap approach
     # O(K*log(M)), O(M)
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
@@ -52,7 +54,6 @@ class Solution:
             k -= 1
         
         return ans  
-        
         
 
 sol = Solution()

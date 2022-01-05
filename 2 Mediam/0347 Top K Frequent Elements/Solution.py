@@ -4,6 +4,7 @@ from collections import Counter
 
 class Solution:
     # Solution 1
+    #
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         if k == len(nums):
             return nums
@@ -20,6 +21,7 @@ class Solution:
             else:
                 heapq.heappushpop(ans, [val, key])
         return [key for _,key in ans]
+
 
 sol = Solution()
 print(sol.topKFrequent([1,1,1,2,2,3],2))
