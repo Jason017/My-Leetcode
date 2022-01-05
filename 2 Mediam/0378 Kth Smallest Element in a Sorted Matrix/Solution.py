@@ -3,7 +3,7 @@ from typing import List
 
 class Solution:
     # Solution 1: Flattening the Matrix
-    # O(n), O(n)
+    # O(N), O(N)
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
         nums = []
         for m in matrix:
@@ -11,8 +11,9 @@ class Solution:
         nums.sort()
         return nums[k-1]
     
+
     # Solution 2 (Best Approach): Binary Search
-    # O(nlogn), O(1)
+    # O(N*log(N)), O(1)
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
         left,right,n = matrix[0][0],matrix[-1][-1],len(matrix)
 
@@ -34,8 +35,25 @@ class Solution:
                 right = mid
         return left
 
-    # Solution 3: Min-Heap approach
 
+    # Solution 3: Min-Heap approach
+    # O(K*log(M)), O(M)
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        m = len(matrix)
+        minHeap = []
+        
+        for i in range(min(k, m)):
+            minHeap.append((matrix[i][0], i, 0))
+            
+        heapq.heapify(minHeap)
+        
+        while k:
+            ans, r, c = heapq.heappop(minHeap)
+            if c < m-1:
+                heapq.heappush(minHeap, (matrix[r][c+1], r, c+1))
+            k -= 1
+        
+        return ans  
         
 
 sol = Solution()
