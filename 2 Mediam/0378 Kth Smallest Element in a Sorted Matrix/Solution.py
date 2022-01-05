@@ -36,20 +36,7 @@ class Solution:
         return left
 
     # Solution 3: Min-Heap approach
-    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
-        n = len(matrix)
-        minHeap = []
-        
-        for r in range(min(k, n)):
-            minHeap.append((matrix[r][0], r, 0))
-        heapq.heapify(minHeap)
 
-        while k:
-            num, r, c = heapq.heappop(minHeap)
-            if c < n-1:
-                heapq.heappush(minHeap, (matrix[r][c+1], r, c+1))
-            k-=1
-        return num
         
 
 sol = Solution()
