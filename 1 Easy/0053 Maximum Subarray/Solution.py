@@ -3,7 +3,7 @@ from typing import List
 
 class Solution:
     # Solution 1: Dynamic Programming, Kadane's Algorithm
-    # O(n), O(1)
+    # O(N), O(1)
     def maxSubArray(self, nums: List[int]) -> int:
         curr, ans = nums[0]
         for num in nums[1:]:
@@ -12,7 +12,7 @@ class Solution:
         return ans
 
     # Solution 2: Divide and Conquer (Advanced)
-    # O(n*log(n)) O(log(n))
+    # O(N*log(N)) O(log(N))
     def maxSubArray(self, nums: List[int]) -> int:
         def findBestSubarray(nums, left, right):
             if left > right:
