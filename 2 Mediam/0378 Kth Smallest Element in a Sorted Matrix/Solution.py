@@ -1,10 +1,9 @@
 import heapq
 from typing import List
-import heapq
 
 class Solution:
     # Solution 1: Flattening the Matrix
-    # O(n), O(n)
+    # O(N), O(N)
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
         nums = []
         for m in matrix:
@@ -13,7 +12,7 @@ class Solution:
         return nums[k-1]
     
     # Solution 2 (Best Approach): Binary Search
-    # O(nlogn), O(1)
+    # O(N*log(N)), O(1)
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
         left,right,n = matrix[0][0],matrix[-1][-1],len(matrix)
 
@@ -36,6 +35,7 @@ class Solution:
         return left
 
     # Solution 3: Min-Heap approach
+    # O(K*log(M)), O(M)
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
         m = len(matrix)
         minHeap = []
