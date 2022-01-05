@@ -1,6 +1,6 @@
 import heapq
 from typing import List
-from bisect import bisect_right
+import heapq
 
 class Solution:
     # Solution 1: Flattening the Matrix
@@ -36,7 +36,23 @@ class Solution:
         return left
 
     # Solution 3: Min-Heap approach
-
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        m = len(matrix)
+        minHeap = []
+        
+        for i in range(min(k, m)):
+            minHeap.append((matrix[i][0], i, 0))
+            
+        heapq.heapify(minHeap)
+        
+        while k:
+            ans, r, c = heapq.heappop(minHeap)
+            if c < m-1:
+                heapq.heappush(minHeap, (matrix[r][c+1], r, c+1))
+            k -= 1
+        
+        return ans  
+        
         
 
 sol = Solution()
