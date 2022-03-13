@@ -1,12 +1,20 @@
 from typing import List
 
+
 class Solution:
     # Solution 1: Brute Force
-    # O(n^2), O(1)
+    # O(n), O(1)
     def compress(self, chars: List[str]) -> int:
+        '''
+        aaabbc
+           l r     
+        a2bc
+          i
+        ans = 4
+        '''
         if len(chars) == 1:
             return 1
-        
+
         left = right = ans = 0
         while right < len(chars):
             left = right
@@ -20,12 +28,3 @@ class Solution:
                 chars[ans:ans+len(cnt)] = cnt
                 ans += len(cnt)
         return ans
-    
-        '''
-        aaabba
-           s e      
-        a2b           res
-          i
-          
-        ans = 3
-        '''
