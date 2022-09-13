@@ -51,11 +51,18 @@ class Solution:
         dp = [False] * (n + 1)
         dp[0] = True
         wordSet = set(wordDict)
-        
+
         for end in range(1, n + 1):
             for start in range(n - 1, -1, -1):
                 if dp[start] and s[start:end] in wordSet:
-                    dp[end] = True 
+                    dp[end] = True
                     break
         return dp[n]
-        
+
+
+sol = Solution()
+print(sol.wordBreak("leetcode", ["leet", "code"]))  # True
+print(sol.wordBreak("applepenapple", ["apple", "pen"]))  # True
+print(sol.wordBreak("catsandog", [
+      "cats", "dog", "sand", "and", "cat"]))  # False
+print(sol.wordBreak("aaaaaaa", ["aaaa", "aaa"]))  # True
