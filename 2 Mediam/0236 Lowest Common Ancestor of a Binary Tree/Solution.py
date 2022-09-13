@@ -4,13 +4,14 @@ class TreeNode:
         self.left = None
         self.right = None
 
+
 class Solution:
     def __init__(self):
         self.ans = None
 
     # Solution 1: Backtracking
     # O(n) O(n)
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         def backtrack(curr):
             if not curr:
                 return False
@@ -26,13 +27,14 @@ class Solution:
         return self.ans
 
     # Solution 2: DFS
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        if not root: return None
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+        if not root:
+            return None
         if p == root or q == root:
             return root
-        left = self.lowestCommonAncestor(root.left, p , q)
-        right = self.lowestCommonAncestor(root.right, p , q)
-        
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+
         if left and right:
             return root
         if not left:
@@ -42,7 +44,7 @@ class Solution:
 
     # Solution 3: Iteration with Parent Pointers
     # O(n) O(n)
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         stack = [root]
         parent = {root: None}
         while p not in parent or q not in parent:

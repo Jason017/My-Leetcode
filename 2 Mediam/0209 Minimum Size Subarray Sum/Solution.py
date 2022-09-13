@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Solution:
     # Solution 1: Two Pointer
     # O(n), O(1)

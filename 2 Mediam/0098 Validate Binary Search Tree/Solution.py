@@ -1,29 +1,28 @@
-from typing import Optional
-
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
 
+
 class Solution:
     # Solution 1: Recursive Inorder Traversal
     # O(n), O(n)
-    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+    def isValidBST(self, root: TreeNode) -> bool:
         def inOrder(root, output):
             if not root:
                 return
             inOrder(root.left, output)
             output.append(root.val)
             inOrder(root.right, output)
-        
-        output=[]
-        inOrder(root,output)
+
+        output = []
+        inOrder(root, output)
         for i in range(len(output)-1):
             if output[i] >= output[i+1]:
                 return False
         return True
-    
+
     def isValidBST(self, root: TreeNode) -> bool:
         def inOrder(root):
             if not root:
@@ -37,7 +36,6 @@ class Solution:
 
         self.prev = float('-inf')
         return inOrder(root)
-
 
     # Solution 2: Iterative Inorder Traversal
     # O(n) in the worst case when the tree is BST or the "bad" element is a rightmost leaf
@@ -58,7 +56,6 @@ class Solution:
                 curr = node.right
         return True
 
-
     # Solution 3: Recursive Traversal with Valid Range
     # O(n), O(n)
     def isValidBST(self, root: TreeNode) -> bool:
@@ -68,9 +65,8 @@ class Solution:
             if node.val <= low or node.val >= high:
                 return False
             return validate(node.right, node.val, high) and \
-                   validate(node.left, low, node.val)
+                validate(node.left, low, node.val)
         return validate(root)
-
 
     # Solution 4: Recursive Traversal with Valid Range
     # O(n), O(n)

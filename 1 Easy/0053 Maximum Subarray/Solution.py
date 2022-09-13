@@ -1,6 +1,7 @@
 import math
 from typing import List
 
+
 class Solution:
     # Solution 1: Dynamic Programming, Kadane's Algorithm
     # O(N), O(1)
@@ -12,7 +13,7 @@ class Solution:
         return ans
 
     # Solution 2: Divide and Conquer (Advanced)
-    # O(N*log(N)) O(log(N))
+    # O(NlogN) O(logN)
     def maxSubArray(self, nums: List[int]) -> int:
         def findBestSubarray(nums, left, right):
             if left > right:
