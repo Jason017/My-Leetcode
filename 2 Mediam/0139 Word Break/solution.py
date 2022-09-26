@@ -4,7 +4,7 @@ from collections import deque
 
 class Solution:
     # BFS
-    # O(N^3) O(N)
+    # O(N*L^2) O(N), N is the length of wordDict and L is the length of longest word
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         words = set(wordDict)
         q = deque([0])
@@ -23,7 +23,7 @@ class Solution:
         return False
 
     # DFS + Memo (Top-down approach)
-    # O(N^3) O(N)
+    # O(N*L^2) O(N)
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         memo = {}
         wordSet = set(wordDict)
@@ -43,8 +43,29 @@ class Solution:
             return False
         return dfs(s)
 
+    # DFS + Memo (Bottom-up approach)
+    # O(N^3) O(N)
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        n = len(s)
+        wordSet = set(wordDict)
+        memo = {}
+
+        def dfs(start):
+            if start == n:
+                return True
+            if start in memo:
+                return memo[start]
+
+            for end in range(start + 1, n + 1):
+                if s[start:end] in wordSet and dfs(end):
+                    memo[end] = True
+                    return True
+            memo[start] = False
+            return False
+        return dfs(0)
+
     # DP (Bottom-up Approach)
-    # O(N^2) O(N)
+    # O(N*L^2) O(N)
     # https://www.youtube.com/watch?v=1U4jQusbeJc&t=9s&ab_channel=Knapsack
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         n = len(s)

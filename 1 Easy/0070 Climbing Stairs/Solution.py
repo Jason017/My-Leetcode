@@ -1,31 +1,31 @@
-# Algorithm-and-Data-Structure/Random-Questions/climbingStair.py
-# Algorithm-and-Data-Structure/Random-Questions/findTotalWays.py
+# Algorithm-and-Data-Structure/Categories/DP/climbingStair.py
+# Algorithm-and-Data-Structure/Categories/Recursion/findTotalWays.py
 
 class Solution:
     # Solution 1
     def climbStairs(self, n: int) -> int:
         if n <= 2:
             return n
-        
+
         s1, s2 = 1, 2
-        for _ in range(3,n+1):
+        for _ in range(3, n+1):
             s3 = s1 + s2
             s1 = s2
             s2 = s3
-        
+
         return s2
 
     # Solution 2
     def climbStairs(self, n: int) -> int:
         if n <= 2:
             return n
-        
+
         dp = [0] * (n+1)
         dp[1], dp[2] = 1, 2
 
         for i in range(3, n+1):
             dp[i] = dp[i-1] + dp[i-2]
-        
+
         return dp[n]
 
     # Solution 3
@@ -45,7 +45,7 @@ class Solution:
     def climbStairs(self, n: int) -> int:
         memo = [0] * (n+1)
         return self.helper(0, n, memo)
-        
+
 
 sol = Solution()
 print(sol.climbStairs(3))

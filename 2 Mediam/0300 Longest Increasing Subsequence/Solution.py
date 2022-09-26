@@ -3,6 +3,7 @@ from bisect import bisect_left
 
 
 class Solution:
+
     # Solution 1: DP
     # O(N^2), O(N)
     def lengthOfLIS(self, nums: List[int]) -> int:
@@ -20,7 +21,7 @@ class Solution:
         n = len(nums)
         dp = [1] * n
 
-        for i in range(n):
+        for i in range(n-1):
             for j in range(i+1, n):
                 if nums[i] < nums[j]:
                     dp[j] = max(dp[j], dp[i]+1)
@@ -28,16 +29,15 @@ class Solution:
         return max(dp)
 
     # Solution 2: Bisect
-    # O(NlogN)), O(N)
-
+    # O(NlogN), O(N)
     def lengthOfLIS(self, nums: List[int]) -> int:
-        arr = []
+        res = []
 
         for num in nums:
-            idx = bisect_left(arr, num)
-            if idx == len(arr):
-                arr.append(num)
+            idx = bisect_left(res, num)
+            if idx == len(res):
+                res.append(num)
             else:
-                arr[idx] = num
+                res[idx] = num
 
-        return len(arr)
+        return len(res)
