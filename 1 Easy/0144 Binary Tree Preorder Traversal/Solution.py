@@ -9,29 +9,29 @@ class Solution:
     # Solution 1: Recursion
     # O(N), O(N)
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        def helper(node):
+        def traverse(node):
             if not node:
                 return node
-            output.append(node.val)
-            helper(node.left)
-            helper(node.right)
-            
-        output = []
-        helper(root)
-        return output
+            res.append(node.val)
+            traverse(node.left)
+            traverse(node.right)
+
+        res = []
+        traverse(root)
+        return res
 
 
     # Solution 2: Iteration
     # O(N), O(N)
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        output = []
+        res = []
         stack = [root]
-        
+
         while stack:
             node = stack.pop()
             if node:
-                output.append(node.val)
+                res.append(node.val)
                 stack.append(node.right)
                 stack.append(node.left)
 
-        return output
+        return res
