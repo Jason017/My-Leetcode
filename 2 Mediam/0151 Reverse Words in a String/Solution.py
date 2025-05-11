@@ -54,5 +54,3 @@ class Solution:
             
         s = s[:j]
         return "".join(s)
-    
-
