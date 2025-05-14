@@ -11,23 +11,23 @@ class Solution:
     # O(H) height of the graph
     def cloneGraph(self, node: 'Node') -> 'Node':
         if not node:
-            return node
+            return None
 
-        oldToNew = {node: Node(node.val)}
-        def dfs(n):
-            for nei in n.neighbors:
-                if nei not in oldToNew:
-                    oldToNew[nei] = Node(nei.val)
+        mp = {node: Node(node.val)}
+        def dfs(curr):
+            for nei in curr.neighbors:
+                if nei not in mp:
+                    mp[nei] = Node(nei.val)
                     dfs(nei)
-                oldToNew[n].neighbors.append(oldToNew[nei])
-
+                mp[curr].neighbors.append(mp[nei])
+        
         dfs(node)
-        return oldToNew[node]
+        return mp[node]
 
 
     def cloneGraph(self, node: 'Node') -> 'Node':
         if not node:
-            return node
+            return None
 
         oldToNew = {}
         def dfs(n):
@@ -64,4 +64,3 @@ class Solution:
                     q.append(nei)
                 oldToNew[n].neighbors.append(oldToNew[nei])
         return oldToNew[node]
-
