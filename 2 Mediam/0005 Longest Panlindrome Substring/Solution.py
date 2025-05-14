@@ -6,39 +6,38 @@ class Solution:
         dp = [[False] * n for _ in range(n)]
         for i in range(n):
             dp[i][i] = True
-        
-        ans = s[0]
-        for i in range(n-1, -1, -1):
-            for j in range(i+1, n):             
-                if s[i] == s[j] and (dp[i+1][j-1] or j==i+1):
-                    dp[i][j] = True
-                    if j-i+1>len(ans):
-                        ans=s[i:j+1]
-        return ans
 
+        ans = s[0]
+        for i in range(n - 1, -1, -1):
+            for j in range(i + 1, n):
+                if s[i] == s[j] and (dp[i + 1][j - 1] or j == i + 1):
+                    dp[i][j] = True
+                    if j - i + 1 > len(ans):
+                        ans = s[i:j + 1]
+        return ans
 
     # Solution 2: Expand Around Center
     # O(n^2), O(1)
     def longestPalindrome(self, s: str) -> str:
-        if len(s)<=1:
+        if len(s) <= 1:
             return s
 
-        def is_palindrome(left,right):
-            while left>=0 and right<len(s) and s[left] == s[right]:
-                left-=1
-                right+=1
-            return right-left-1
-        
+        def is_palindrome(left, right):
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                left -= 1
+                right += 1
+            return right - left - 1
+
         start = end = 0
         for i in range(len(s)):
-            len1 = is_palindrome(i,i)
-            len2 = is_palindrome(i,i+1)
+            len1 = is_palindrome(i, i)
+            len2 = is_palindrome(i, i + 1)
             max_len = max(len1, len2)
-            if max_len > end-start:
-                start = i - (max_len-1)//2
-                end = i + max_len//2
-                        
-        return s[start:end+1]
+            if max_len > end - start:
+                start = i - (max_len - 1) // 2
+                end = i + max_len // 2
+
+        return s[start:end + 1]
 
     # Simpler Approach
     def longestPalindrome(self, s: str) -> str:
@@ -46,13 +45,29 @@ class Solution:
             while l >= 0 and r < len(s) and s[l] == s[r]:
                 l -= 1
                 r += 1
-            return s[l+1:r]
+            return s[l + 1:r]
 
         p = ''
         for i in range(len(s)):
-            p1 = get_palindrome(i, i+1)
+            p1 = get_palindrome(i, i + 1)
             p2 = get_palindrome(i, i)
             p = max([p, p1, p2], key=lambda x: len(x))
         return p
-    
-    
+
+    def longestPalindrome(self, s: str) -> str:
+        self.res = ""
+
+        def expandFromCenter(l, r):
+            curr = ""
+            while l >= 0 and r < len(s) and s[l] == s[r]:
+                curr = s[l] if l == r else s[l] + curr + s[r]
+                l -= 1
+                r += 1
+            if len(curr) > len(self.res):
+                self.res = curr
+
+        for i in range(len(s)):
+            expandFromCenter(i, i)
+            expandFromCenter(i, i + 1)
+
+        return self.res
