@@ -1,4 +1,5 @@
 from collections import deque
+from typing import Optional
 
 class Node:
     def __init__(self, val = 0, neighbors = None):
@@ -9,23 +10,23 @@ class Solution:
     # Solution 1: DFS + Recursion
     # O(E+V) number of edges and vertices in the graph
     # O(H) height of the graph
-    def cloneGraph(self, node: 'Node') -> 'Node':
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
         if not node:
             return None
 
-        mp = {node: Node(node.val)}
+        oldToNew = {node: Node(node.val)}
         def dfs(curr):
             for nei in curr.neighbors:
-                if nei not in mp:
-                    mp[nei] = Node(nei.val)
+                if nei not in oldToNew:
+                    oldToNew[nei] = Node(nei.val)
                     dfs(nei)
-                mp[curr].neighbors.append(mp[nei])
+                oldToNew[curr].neighbors.append(oldToNew[nei])
         
         dfs(node)
-        return mp[node]
+        return oldToNew[node]
 
 
-    def cloneGraph(self, node: 'Node') -> 'Node':
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
         if not node:
             return None
 
@@ -45,10 +46,27 @@ class Solution:
         return oldToNew[node]
 
 
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        oldToNew = {}
+        def dfs(curr):
+            if not curr:
+                return None
+            
+            if curr in oldToNew:
+                return oldToNew[curr]
+            oldToNew[curr] = Node(curr.val, [])
+            
+            for nei in curr.neighbors:
+                oldToNew[nei] = dfs(nei)
+                oldToNew[curr].neighbors.append(oldToNew[nei])
+            return oldToNew[curr]
+        
+        return dfs(node)
+
     # Solution 2: BFS
     # O(E+V) number of edges and vertices in the graph
     # O(W) width of the graph
-    def cloneGraph(self, node: 'Node') -> 'Node':
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
         if not node:
             return node
         

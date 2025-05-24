@@ -1,9 +1,7 @@
 from typing import List
 from bisect import bisect_left
 
-
 class Solution:
-
     # Solution 1: DP
     # O(N^2), O(N)
     def lengthOfLIS(self, nums: List[int]) -> int:
@@ -40,4 +38,24 @@ class Solution:
             else:
                 res[idx] = num
 
+        return len(res)
+
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        def binarySearch(target):
+            l, r = 0, len(res) - 1
+            while l <= r:
+                m = (l + r) // 2
+                if res[m] < target:
+                    l = m + 1
+                else:
+                    r = m - 1
+            return l if l < len(res) else len(res)
+        
+        res = []
+        for num in nums:
+            idx = binarySearch(num)
+            if idx == len(res):
+                res.append(num)
+            else:
+                res[idx] = num
         return len(res)

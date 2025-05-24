@@ -30,3 +30,14 @@ class Solution:
             else:
                 stack.pop()
         return stack == []
+    
+    def isValid(self, s: str) -> bool:
+        mp = {'(':')','[':']','{':'}'}
+        stack = []
+
+        for p in s:
+            if p in mp:
+                stack.append(p)
+            elif stack == [] or mp[stack.pop()] != p:
+                return False
+        return stack == []

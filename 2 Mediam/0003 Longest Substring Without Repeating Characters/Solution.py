@@ -5,52 +5,59 @@ class Solution:
         if not s:
             return 0
 
-        left, right, ans = 0, 0, 0
+        l, r, res = 0, 0, 0
         seen = set()
-        while right < len(s):
-            if s[right] not in seen:
-                seen.add(s[right])
-                right += 1
-                ans = max(ans, right-left)
+        while r < len(s):
+            if s[r] not in seen:
+                seen.add(s[r])
+                r += 1
+                res = max(res, r-l)
             else:
-                seen.remove(s[left])
-                left += 1
+                seen.remove(s[l])
+                l += 1
     
-        return ans
+        return res
 
 
     # Solution 2: Sliding Window
     # O(n), O(n)
     def lengthOfLongestSubstring(self, s: str) -> int:
-        if not s:
-            return 0
-            
         chars = [0] * 128
-        left = right = ans = 0
+        l = r = res = 0
 
-        while right < len(s):
-            chars[ord(s[right])] += 1
-            while chars[ord(s[right])] > 1:
-                chars[ord(s[left])] -= 1
-                left += 1
-            ans = max(ans, right - left + 1)
-            right += 1
-        return ans
+        while r < len(s):
+            chars[ord(s[r])] += 1
+            while chars[ord(s[r])] > 1:
+                chars[ord(s[l])] -= 1
+                l += 1
+            res = max(res, r - l + 1)
+            r += 1
+        return res
 
 
     # Solution 3: Optimized Sliding Window
     # O(n), O(n)
     def lengthOfLongestSubstring(self, s: str) -> int:
-        if not s:
-            return 0
-
-        left = ans = 0
         mp = {}
+        l = res = 0
 
-        for right in range(len(s)):
-            if s[right] in mp:
-                left = max(left, mp[s[right]])
-            ans = max(ans, right - left + 1)
-            mp[s[right]] = right + 1
+        for r in range(len(s)):
+            if s[r] in mp:
+                l = max(l, mp[s[r]])
+            res = max(res, r - l + 1)
+            mp[s[r]] = r + 1
             
-        return ans
+        return res
+    
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        mp = {}
+        res = l = 0
+
+        for r in range(len(s)):
+            char = s[r]
+            if char in mp and mp[char] > l:
+                l = mp[char] + 1
+            mp[char] = r
+            res = max(res, r - l + 1)
+        
+        return res
