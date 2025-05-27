@@ -9,35 +9,36 @@ class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
         stack = []
         n = len(temperatures)
-        ans = [None] * n
+        res = [None] * n
         
-        for i in range(n-1,-1,-1):
+        for i in range(n-1, -1, -1):
             while stack and temperatures[stack[-1]] <= temperatures[i]:
                 stack.pop()
-            ans[i] = stack[-1] - i if stack else 0
+            res[i] = stack[-1] - i if stack else 0
             stack.append(i)
-        return ans
+
+        return res
     
     # Better Stack Approach
     # O(n), O(n)
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
         stack = []
         n = len(temperatures)
-        ans = [0] * n
+        res = [0] * n
 
         for curr, temp in enumerate(temperatures):
             while stack and temperatures[stack[-1]] < temp:
                 prev = stack.pop()
-                ans[prev] = curr - prev
+                res[prev] = curr - prev
             stack.append(curr)
         
-        return ans
+        return res
 
     # Solution 2: Array, Optimized Space
     # # O(n), O(1)
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
         n = len(temperatures)
-        ans = []
+        res = []
         hottest = 0
 
         for curr in range(n-1,-1,-1):
@@ -48,7 +49,6 @@ class Solution:
 
             days = 1
             while temperatures[curr + days] <= temp:
-                days += ans[curr+days]
-            ans[curr] = days
-        return ans
-        
+                days += res[curr+days]
+            res[curr] = days
+        return res

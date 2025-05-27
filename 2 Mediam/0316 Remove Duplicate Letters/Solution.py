@@ -24,8 +24,9 @@ class Solution:
         for i in range(len(s)):
             if s[i] in seen:
                 continue
-            while stack and stack[-1] >= s[i] and i < last[stack[-1]]:
+            while stack and stack[-1] > s[i] and i < last[stack[-1]]:
                 seen.remove(stack.pop())
             stack.append(s[i])
             seen.add(s[i])
+
         return "".join(stack)

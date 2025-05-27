@@ -1,9 +1,39 @@
 from typing import List
+from collections import deque
 
 class Solution:
-    # Solution 1: DFS + Stack
-    # O(N+E), O(N+E)
+    # Solution1: BFS
+    # O(V+E), O(V+E)
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
+        if len(edges) > n - 1:
+            return False
+        
+        adj = [[] for _ in range(n)]
+        for u, v in edges:
+            adj[u].append(v)
+            adj[v].append(u)
+        
+        visited = {0}
+        q = deque([(0, -1)])  # (current node, parent node)
+        
+        while q:
+            node, parent = q.popleft()
+            for nei in adj[node]:
+                if nei == parent:
+                    continue
+                if nei in visited:
+                    return False
+                visited.add(nei)
+                q.append((nei, node))
+        
+        return len(visited) == n
+
+    # Solution 2: DFS + Stack
+    # O(V+E), O(V+E)
+    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+        if len(edges) > n - 1:
+            return False
+        
         adj = {i:[] for i in range(n)}
         for i,j in edges:
             adj[i].append(j)
@@ -23,25 +53,28 @@ class Solution:
                 stack.append(nei)
         return len(parent) == n
 
-    # Solution 2: DFS Recursive Approach
-    # O(N+E), O(N+E)
+    # Solution 3: DFS Recursive
+    # O(V+E), O(V+E)
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
-        adj = {i:[] for i in range(n)}
-        for i,j in edges:
-            adj[i].append(j)
-            adj[j].append(i)
-
+        if len(edges) > n - 1:
+            return False
+        
+        adj = [[] for _ in range(n)]
+        for u, v in edges:
+            adj[u].append(v)
+            adj[v].append(u)
+        
         visited = set()
-        def dfs(vertex, prev):
-            if vertex in visited:
+        def dfs(node, prev):
+            if node in visited:
                 return False
             
-            visited.add(vertex)
-            for nei in adj[vertex]:
+            visited.add(node)
+            for nei in adj[node]:
                 if nei == prev:
                     continue
-                if not dfs(nei, vertex):
+                if not dfs(nei, node):
                     return False
             return True
         
-        return dfs(0, -1) and n == len(visited)
+        return dfs(0, -1) and len(visited) == n

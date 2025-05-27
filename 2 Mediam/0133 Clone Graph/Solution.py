@@ -10,6 +10,11 @@ class Solution:
     # Solution 1: DFS + Recursion
     # O(E+V) number of edges and vertices in the graph
     # O(H) height of the graph
+    # 
+    # You're visiting every node once, and for each node, 
+    # you iterate through its neighbors (edges) once. That 
+    # leads to a total time proportional to:
+    # V for visiting nodes, E for traversing edges.
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
         if not node:
             return None
@@ -54,7 +59,7 @@ class Solution:
             
             if curr in oldToNew:
                 return oldToNew[curr]
-            oldToNew[curr] = Node(curr.val, [])
+            oldToNew[curr] = Node(curr.val)
             
             for nei in curr.neighbors:
                 oldToNew[nei] = dfs(nei)
@@ -75,10 +80,10 @@ class Solution:
         oldToNew[node] = Node(node.val)
         
         while q:
-            n = q.popleft()
-            for nei in n.neighbors:
+            curr = q.popleft()
+            for nei in curr.neighbors:
                 if nei not in oldToNew:
                     oldToNew[nei] = Node(nei.val)
                     q.append(nei)
-                oldToNew[n].neighbors.append(oldToNew[nei])
+                oldToNew[curr].neighbors.append(oldToNew[nei])
         return oldToNew[node]

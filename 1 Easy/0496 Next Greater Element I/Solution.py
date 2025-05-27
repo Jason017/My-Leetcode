@@ -42,4 +42,4 @@ class Solution:
             mp[num] = stack[-1] if stack else -1
             stack.append(num)
         
-        return [mp.get(num, -1) for num in nums1]
+        return [mp[num] for num in nums1]

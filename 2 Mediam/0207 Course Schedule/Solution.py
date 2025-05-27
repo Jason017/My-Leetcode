@@ -3,11 +3,11 @@ from collections import deque
 
 class Solution:
     # Solution 1: Recursive DFS
-    # O(N+E), O(N)
+    # O(V+E), O(V+E)
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        mp = {i:[] for i in range(numCourses)}
-        for nxt, pre in prerequisites:
-            mp[nxt].append(pre)
+        mp = {crs:[] for crs in range(numCourses)}
+        for crs, pre in prerequisites:
+            mp[crs].append(pre)
         
         visited = set()
         def dfs(crs):
@@ -30,24 +30,51 @@ class Solution:
         return True 
 
 
-    # Solution 2: Iterative DFS, Graph Theory
-    # O(N+E), O(N)
-    def canFinish(self, numCourses, prerequisites):
+    # Solution 2: Kahn's Algorithm, an approach of Topological Sort, BFS
+    # O(V+E), O(V+E)
+    # 
+    # Topological sort is a linear ordering of vertices such that for every directed edge u -> v, 
+    # vertex u comes before v in the ordering. In other wrods, each node in the ordering must appear
+    # before the nodes it points to.
+    # 
+    # Indegree of a node is the number of incoming edges of a node.
+    # 
+    # https://www.youtube.com/watch?v=EUDwWbvtB_Q&ab_channel=AlgoEngine
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        indegrees = [0] * numCourses
         edges = [[] for _ in range(numCourses)]
-        degrees = [0] * numCourses
-        for nxt, pre in prerequisites:
-            edges[pre].append(nxt)
-            degrees[nxt] += 1
+        for crs, pre in prerequisites:
+            edges[pre].append(crs)
+            indegrees[crs] += 1
+        
+        visited = 0
+        q = deque(crs for crs in range(numCourses) if indegrees[crs] == 0)
+        
+        while q:
+            crs = q.popleft()
+            visited += 1
+            for nextCrs in edges[crs]:
+                indegrees[nextCrs] -= 1
+                if indegrees[nextCrs] == 0:
+                    q.append(nextCrs)
+        return numCourses == visited
 
-        q = deque(crs for crs, d in enumerate(degrees) if not d)
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        indegrees = [0] * numCourses
+        edges = [[] for _ in range(numCourses)]
+        for crs, pre in prerequisites:
+            edges[pre].append(crs)
+            indegrees[crs] += 1
+
+        q = deque(crs for crs, d in enumerate(indegrees) if not d)
         while q:
             crs = q.popleft()
             for nxt in edges[crs]:
-                degrees[nxt] -= 1
-                if not degrees[nxt]:
+                indegrees[nxt] -= 1
+                if not indegrees[nxt]:
                     q.append(nxt)
 
-        return not sum(degrees)
+        return not sum(indegrees)
 
 sol = Solution()
 
