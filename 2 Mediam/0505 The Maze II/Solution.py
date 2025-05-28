@@ -10,6 +10,8 @@ class Solution:
     @param destination: the destination
     @return: the shortest distance for the ball to stop at the destination
     """
+    # BFS with relaxation
+    # O((m * n)^2 * max(m,n)), O(max(m,n))
     def shortestDistance(self, maze: List[List[int]], start: List[int], destination: List[int]) -> int:
         m, n = len(maze), len(maze[0])
         dirs = [(0,1), (0,-1), (1,0), (-1,0)]
@@ -27,10 +29,10 @@ class Solution:
                     nc += dc
                     steps += 1
                 
-                rr, cc = nr - dr, nc - dc
-                if distance[rr][cc] > distance[r][c] + steps:
-                    distance[rr][cc] = distance[r][c] + steps
-                    q.append((rr, cc))
+                pr, pc = nr - dr, nc - dc
+                if distance[pr][pc] > distance[r][c] + steps:
+                    distance[pr][pc] = distance[r][c] + steps
+                    q.append((pr, pc))
             
         res = distance[destination[0]][destination[1]]
         return res if res != float('inf') else -1
