@@ -19,11 +19,11 @@ class Solution:
         n = len(nums)
         dp = [1] * n
 
-        for i in range(n-1):
-            for j in range(i+1, n):
-                if nums[i] < nums[j]:
-                    dp[j] = max(dp[j], dp[i]+1)
-
+        for r in range(n):
+            for l in range(r):
+                if nums[r] > nums[l] and dp[r] < dp[l] + 1:
+                    dp[r] = dp[l] + 1
+        
         return max(dp)
 
     # Solution 2: Bisect
